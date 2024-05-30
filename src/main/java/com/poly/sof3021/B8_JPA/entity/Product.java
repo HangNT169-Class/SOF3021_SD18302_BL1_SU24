@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,4 +37,11 @@ public class Product {
     @Column
     private String description;
 
+    // 1 cate -> N product
+    // 1 product -> 1 cate
+    @ManyToOne // => fetch eager
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category1 cate;
+    // Load len table :
+    // Product ID, Product Code, Product Name, Price, Category Code, Category Name
 }
